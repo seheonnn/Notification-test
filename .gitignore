@@ -1,5 +1,5 @@
-*-secret.yml
-/firebase/*.json
+*-local.yml
+**/firebase/*.json
 
 HELP.md
 .gradle

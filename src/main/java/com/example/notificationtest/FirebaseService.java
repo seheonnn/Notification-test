@@ -56,13 +56,14 @@ public class FirebaseService {
 		OkHttpClient client = new OkHttpClient();
 		RequestBody requestBody = RequestBody.create(message, MediaType.get("application/json; charset=utf-8"));
 
-		// TODO 에러 해결
 		Request request = new Request.Builder()
 			.url(fcmUrl)
 			.post(requestBody)
 			.addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + getAccessToken())
-			.addHeader(HttpHeaders.CONTENT_TYPE, "application/json; UTF-8")
+			.addHeader(HttpHeaders.CONTENT_TYPE, "application/json;charset=UTF-8")
 			.build();
+
+		log.info("Sending FCM request. URL: {}, Headers: {}, Body: {}", fcmUrl, request.headers(), message);
 
 		Response response = client.newCall(request)
 			.execute();
@@ -71,7 +72,7 @@ public class FirebaseService {
 
 		// Response error
 		String responseBodyString = response.body().string();
-		log.info(responseBodyString);
+		log.info("Notification ResponseBody : {} ", responseBodyString);
 		int codeIndex = responseBodyString.indexOf("\"code\":");
 		int messageIndex = responseBodyString.indexOf("\"message\":");
 

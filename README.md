@@ -1,1 +1,1 @@
-### Firebase 푸시 알림 테스트
+### Firebase 알림 테스트
